@@ -1,25 +1,70 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './TodoList.css';
-const TodoList = ({tasks, deleteTask}) => {
-	console.log(tasks)
-	const taskList = tasks.length ? (tasks.map((task)=> {
-		return (<div className="list-group-item" key={task.id}>
-			<span>{task.content}</span>
-			<div className="float-right">
-				<button className="btn btn-danger" onClick={() => {deleteTask(task.id)}}>Terminer tâche</button>
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import ModalModifyTask from './ModalModifyTask'
+
+
+
+class TodoList extends Component {
+
+	modifyTask = (task) => {
+		console.log(task)
+		this.props.modifyTask(task);
+	}
+
+	deleteTask = (id) => {
+		console.log(id)
+		this.props.deleteTask(id)
+	}
+
+
+	render() {
+		console.log(this.props.tasks)
+
+		return (
+			<div className="col-12">
+			<ListGroup>
+			{this.props.tasks.map((task)=> {
+				return (<ListGroupItem key={task.id}>
+				<ListGroupItemHeading>{task.title}</ListGroupItemHeading>
+				<ListGroupItemText>{task.description}</ListGroupItemText>
+				<div className="float-right">
+				<button className="btn btn-danger" onClick={() => {this.deleteTask(task.id)}}>Terminer tâche</button>
+				</div>
+				<div className="float-right">
+				<ModalModifyTask modifyTask={this.modifyTask} task={task} buttonLabel={"Modifier tâche"}/>
+				</div>
+				</ListGroupItem>)})}
+			</ListGroup>
 			</div>
-			</div>)
-		})
+			)
+	}
+}
+/*
+const TodoList = ({tasks, deleteTask}) => {
+	
+	const taskList = tasks.length ? (tasks.map((task)=> {
+		return (<ListGroupItem key={task.id}>
+			<ListGroupItemHeading>{task.title}</ListGroupItemHeading>
+			<ListGroupItemText>{task.description}</ListGroupItemText>
+			<div className="float-right">
+			<button className="btn btn-danger" onClick={() => {deleteTask(task.id)}}>Terminer tâche</button>
+			</div>
+			<div className="float-right">
+			<ModalModifyTask task={task} buttonLabel={"Modifier tâche"}/>
+			</div>
+			</ListGroupItem>)
+	})
 	)
-	: (<div className="list-group-item">Aucunne tâche existante</div>)
+	: (<ListGroupItem>Aucunne tâche existante</ListGroupItem>)
 	
 	return (
 		<div className="col-12">
-		<ul className="list-group">
-			{taskList} 
-		</ul>
+		<ListGroup>
+		{taskList} 
+		</ListGroup>
 		</div>
 		)
 }
-
+*/
 export default TodoList;

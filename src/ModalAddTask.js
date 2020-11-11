@@ -17,15 +17,12 @@ class ModalAddTask extends Component {
   addTask = () => {
     this.props.addTask({title:this.state.title, description:this.state.description})
     this.toggle()
+    this.setState({title: "", description: ""})
   };
 
   handleInputChange = (event) => {
     const target = event.target
     this.setState({[target.name]: target.value})
-  };
-
-  handleDescChange = (event) => {
-
   };
 
 render() {

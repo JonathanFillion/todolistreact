@@ -11,8 +11,8 @@ class App extends Component {
   state = {
     show:false,
     tasks: [
-    {id:1, content: "buy some milk"},
-    {id:2, content: "play mario kart"}
+    {id:1, title:"Titre 1", description:"Description 1"},
+    {id:2, title:"Titre 2", description:"Description 2"}
     ]
   }
 
@@ -23,6 +23,7 @@ class App extends Component {
 
     this.setState({tasks:tasks})
   }
+
 
   addTaskOld = (task) => {
     task.id = Math.random();
@@ -36,8 +37,14 @@ class App extends Component {
     this.setState({show:!this.state.show})
   }
 
-  addTask = (data) => {
-    console.log(data)
+  addTask = (task) => {
+    task.id = Math.random()
+    let tasks = [...this.state.tasks, task]
+    this.setState({tasks:tasks})
+  }
+
+  modifyTask = (task) => {
+    console.log(task)
   }
 
   render() {
@@ -50,7 +57,7 @@ class App extends Component {
         <ModalAddTask addTask={this.addTask} buttonLabel={"Ajouter tâche"}/>
       </div>
       <div className="row">
-      <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask}/>
+      <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
       </div>
       <div className="row">
       </div>
