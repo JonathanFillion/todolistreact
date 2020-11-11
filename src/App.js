@@ -24,14 +24,6 @@ class App extends Component {
     this.setState({tasks:tasks})
   }
 
-
-  addTaskOld = (task) => {
-    task.id = Math.random();
-    let tasks = [...this.state.tasks, task];
-    this.setState({tasks:tasks});
-    //this.setState({tasks});
-  }
-
   showAddTask = (event) => {
     console.log(this.state.show)
     this.setState({show:!this.state.show})
@@ -44,7 +36,13 @@ class App extends Component {
   }
 
   modifyTask = (task) => {
-    console.log(task)
+    const index = this.state.tasks.findIndex((e) => {
+      return e.id === task.id
+    })
+    const newTask = {id:task.id,title:task.title,description:task.description}
+    let tasks = this.state.tasks
+    tasks[index] = newTask;
+    this.setState({tasks})
   }
 
   render() {

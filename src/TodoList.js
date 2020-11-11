@@ -8,7 +8,6 @@ import ModalModifyTask from './ModalModifyTask'
 class TodoList extends Component {
 
 	modifyTask = (task) => {
-		console.log(task)
 		this.props.modifyTask(task);
 	}
 
@@ -19,8 +18,6 @@ class TodoList extends Component {
 
 
 	render() {
-		console.log(this.props.tasks)
-
 		return (
 			<div className="col-12">
 			<ListGroup>
@@ -32,7 +29,7 @@ class TodoList extends Component {
 				<button className="btn btn-danger" onClick={() => {this.deleteTask(task.id)}}>Terminer tâche</button>
 				</div>
 				<div className="float-right">
-				<ModalModifyTask modifyTask={this.modifyTask} task={task} buttonLabel={"Modifier tâche"}/>
+					<ModalModifyTask modifyTask={this.modifyTask} task={task} buttonLabel={"Modifier tâche"}/>
 				</div>
 				</ListGroupItem>)})}
 			</ListGroup>

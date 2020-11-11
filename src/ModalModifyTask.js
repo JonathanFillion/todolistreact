@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 class ModalModifyTask extends Component {
   state = {
     modal: false,
+    id: this.props.task.id,
     title: this.props.task.title,
     description: this.props.task.description
   }
@@ -13,7 +14,7 @@ class ModalModifyTask extends Component {
   };
   
   modifyTask = () => {
-    this.props.modifyTask(this.state.task)
+    this.props.modifyTask({id:this.state.id, title:this.state.title, description:this.state.description})
     this.toggle()
     this.setState({title: "", description: ""})
   };
@@ -24,7 +25,7 @@ class ModalModifyTask extends Component {
   };
 
 render() {
-  
+
   return (
     <div>
       <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
