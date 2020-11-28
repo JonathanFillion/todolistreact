@@ -3,3 +3,11 @@
 .btn-pos {
 	margin-bottom: 10px;
 }
+
+.borders {
+	border: 1px solid gray !important;
+}
+
+.larger-icons {
+	font-size: 50px;
+}

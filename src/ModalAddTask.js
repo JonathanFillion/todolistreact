@@ -28,7 +28,7 @@ class ModalAddTask extends Component {
 render() {
   return (
     <div>
-      <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+      <Button className="my-2" color="primary" onClick={this.toggle}><i class="fa fa-home"></i>{this.props.buttonLabel}</Button>
       <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Ajouter une tâche</ModalHeader>
         <ModalBody>

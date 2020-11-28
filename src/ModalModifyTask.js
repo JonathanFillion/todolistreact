@@ -1,5 +1,6 @@
 import React, {Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import './ModalModifyTask.css';
 
 class ModalModifyTask extends Component {
   state = {
@@ -28,7 +29,7 @@ render() {
 
   return (
     <div>
-      <Button color="primary" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+      <Button color="primary" size="lg" className="mx-1" onClick={this.toggle}><i class="fa fa-edit larger-icons"></i></Button>
       <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Modifier une tâche</ModalHeader>
         <ModalBody>

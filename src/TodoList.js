@@ -16,20 +16,22 @@ class TodoList extends Component {
 		this.props.deleteTask(id)
 	}
 
-
 	render() {
 		return (
 			<div className="col-12">
 			<ListGroup>
 			{this.props.tasks.map((task)=> {
-				return (<ListGroupItem key={task.id}>
+				return (<ListGroupItem className="mt-3 borders" key={task.id}>
 				<ListGroupItemHeading>{task.title}</ListGroupItemHeading>
 				<ListGroupItemText>{task.description}</ListGroupItemText>
 				<div className="float-right">
-				<button className="btn btn-danger" onClick={() => {this.deleteTask(task.id)}}>Terminer tâche</button>
+					<button className="btn btn-lg btn-danger mx-1" onClick={() => {this.deleteTask(task.id)}}><i  class="fa fa-trash larger-icons"></i></button>
 				</div>
 				<div className="float-right">
 					<ModalModifyTask modifyTask={this.modifyTask} task={task} buttonLabel={"Modifier tâche"}/>
+				</div>
+				<div className="float-right">
+					<button className="btn btn-lg btn-success mx-1" onClick={() => {}}><i class="fa fa-check larger-icons"></i></button>
 				</div>
 				</ListGroupItem>)})}
 			</ListGroup>
