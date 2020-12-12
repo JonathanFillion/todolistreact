@@ -3,7 +3,8 @@ import TodoList from'./TodoList';
 import AddTask from './AddTask';
 import Nav from './Nav'
 import './App.css';
-
+import today from './today.png'
+import urgent from './urgent.png'
 import ModalAddTask from "./ModalAddTask"
 
 class App extends Component {
@@ -49,28 +50,64 @@ class App extends Component {
     return (
       <div className="App">
       <Nav/>
-      <div className="container mt-3">
-      <div className="row mt-2">
+      <div className="container mt-8">
+      
+      <div className="row mt-3">
+         <div className="col-6">
+           <div className="card predefined-filter">
+             <div className="card-body">
+               <div><img src={today} height="50" width="50" alt="Today"/></div>
+               <div className="font-weight-bold mt-2">Aujourd'hui</div>
+              </div>
+               <a href="#" class="stretched-link"></a>
+           </div>
+         </div>
+         <div className="col-6">
+           <div className="card predefined-filter">
+             <div className="card-body">
+               <div><img src={urgent} height="50" width="50" /></div>
+               <div className="font-weight-bold mt-2">Importants</div>
+             </div>
+             <a href="#" class="stretched-link"></a>
+           </div>
+         </div>
+       </div>
+
+      <div className="row mt-3">
         <div className="col-12">
           <div class="input-group mb-2 mr-sm-2">
            <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-search"></i></div>
             </div>
-            <input className="form-control" placeholder="Recherche" type="text"></input>
+            <input className="form-control form-control-lg" placeholder="Recherche" type="text"></input>
           </div>
         </div>
        </div>
+
+       
+
       <div>
         <ModalAddTask className="button-add pull-right" addTask={this.addTask} buttonLabel={"Ajouter tâche"}/>
       </div>
-      {/* <div className="row">
-         <div className="col-6"><div className="filter-box">filter 1</div></div>
-         <div className="col-6"><div className="filter-box">filter 2</div></div>
-       </div>*/}
+
+{/*      <div className="row mt-4 ml-1">
+        <h3>Toutes les tâches</h3>
+      </div>
 
       <div className="row">
-      <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
+        <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
+      </div>*/}
+
+      <div className="card mt-3">
+        <div className="card-header">
+          <h3>Toutes les tâches</h3>
+        </div>
+        <div className="card-body">
+          <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
+        </div>
       </div>
+
+
       </div>
       </div>
       );

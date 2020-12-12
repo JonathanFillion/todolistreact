@@ -40,3 +40,11 @@
   border: 1px solid black;
   border-radius: 1px;
 }
+
+.list-title {
+  text-decoration: underline;
+}
+
+.predefined-filter:hover {
+  background-color: #ededed;
+}
