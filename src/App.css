@@ -31,3 +31,12 @@
   border-radius: 18px;
   border: 1px solid #cfcece;
 }
+
+.button-add {
+  margin-left: 100px;
+}
+
+.filter-box {
+  border: 1px solid black;
+  border-radius: 1px;
+}

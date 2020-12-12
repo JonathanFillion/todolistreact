@@ -47,17 +47,30 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App container">
+      <div className="App">
       <Nav/>
-      <div className="row">
+      <div className="container mt-3">
+      <div className="row mt-2">
+        <div className="col-12">
+          <div class="input-group mb-2 mr-sm-2">
+           <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-search"></i></div>
+            </div>
+            <input className="form-control" placeholder="Recherche" type="text"></input>
+          </div>
+        </div>
+       </div>
+      <div>
+        <ModalAddTask className="button-add pull-right" addTask={this.addTask} buttonLabel={"Ajouter tâche"}/>
       </div>
-      <div className="row">
-        <ModalAddTask addTask={this.addTask} buttonLabel={"Ajouter tâche"}/>
-      </div>
+      {/* <div className="row">
+         <div className="col-6"><div className="filter-box">filter 1</div></div>
+         <div className="col-6"><div className="filter-box">filter 2</div></div>
+       </div>*/}
+
       <div className="row">
       <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
       </div>
-      <div className="row">
       </div>
       </div>
       );
