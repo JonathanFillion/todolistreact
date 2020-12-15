@@ -12,23 +12,24 @@ class ModalAddTask extends Component {
 
   toggle = () => {
     this.setState({modal: !this.state.modal})
-  };
+  }
   
   addTask = () => {
     this.props.addTask({title:this.state.title, description:this.state.description})
+    this.props.addTaskNotify()
     this.toggle()
     this.setState({title: "", description: ""})
-  };
+  }
 
   handleInputChange = (event) => {
     const target = event.target
     this.setState({[target.name]: target.value})
-  };
+  }
 
 render() {
   return (
-    <div className="row mt-5">
-      <div className="col-12"><Button size="lg" block className="float-right" color="primary" onClick={this.toggle}><i class="fa fa-plus"></i> {this.props.buttonLabel}</Button></div>
+    <div className="row">
+      <div className="col-12"><Button size="lg" className="float-right" color="primary" onClick={this.toggle}><i className="fa fa-plus"></i> {this.props.buttonLabel}</Button></div>
       <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Ajouter une tâche</ModalHeader>
         <ModalBody>

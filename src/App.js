@@ -6,6 +6,8 @@ import './App.css';
 import today from './today.png'
 import urgent from './urgent.png'
 import ModalAddTask from "./ModalAddTask"
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 class App extends Component {
 
@@ -13,12 +15,39 @@ class App extends Component {
     show:false,
     tasks: [
     {id:1, title:"Titre 1", description:"Description 1"},
-    {id:2, title:"Titre 2", description:"Description 2"}
+    {id:2, title:"Titre 2", description:"Description 2"},
+    {id:3, title:"Titre 3", description:"Description 3"}
     ]
+  }
+
+   createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case 'completed':
+          NotificationManager.success('Tâche complétée');
+          break;
+        case 'modified':
+          NotificationManager.info('Tâche modifiée');
+          break;
+        case 'created':
+          NotificationManager.info('Tâche créée');
+          break;
+        case 'deleted':
+          NotificationManager.error('Tâche supprimée')
+          break;
+      }
+    };
   }
 
   deleteTask = (id) => {
     const tasks = this.state.tasks.filter(task => {
+      return task.id !== id
+    })
+
+    this.setState({tasks:tasks})
+  }
+  completeTask = (id) => {
+      const tasks = this.state.tasks.filter(task => {
       return task.id !== id
     })
 
@@ -52,14 +81,19 @@ class App extends Component {
       <Nav/>
       <div className="container mt-8">
       
-      <div className="row mt-3">
+
+
+      <div className="card mt-3">
+      <div className="card-header"><h3>Filtres</h3></div>
+      <div className="card-body">
+      <div className="row mt-1">
          <div className="col-6">
            <div className="card predefined-filter">
              <div className="card-body">
                <div><img src={today} height="50" width="50" alt="Today"/></div>
                <div className="font-weight-bold mt-2">Aujourd'hui</div>
               </div>
-               <a href="#" class="stretched-link"></a>
+               <a href="#" className="stretched-link"></a>
            </div>
          </div>
          <div className="col-6">
@@ -68,27 +102,29 @@ class App extends Component {
                <div><img src={urgent} height="50" width="50" /></div>
                <div className="font-weight-bold mt-2">Importants</div>
              </div>
-             <a href="#" class="stretched-link"></a>
+             <a href="#" className="stretched-link"></a>
            </div>
          </div>
        </div>
 
       <div className="row mt-3">
         <div className="col-12">
-          <div class="input-group mb-2 mr-sm-2">
-           <div class="input-group-prepend">
-              <div class="input-group-text"><i class="fa fa-search"></i></div>
+          <div className="input-group mb-2 mr-sm-2">
+           <div className="input-group-prepend">
+              <div className="input-group-text"><i className="fa fa-search"></i></div>
             </div>
             <input className="form-control form-control-lg" placeholder="Recherche" type="text"></input>
           </div>
         </div>
        </div>
 
-       
-
-      <div>
-        <ModalAddTask className="button-add pull-right" addTask={this.addTask} buttonLabel={"Ajouter tâche"}/>
+       </div>
       </div>
+
+
+        <div>
+          
+        </div>
 
 {/*      <div className="row mt-4 ml-1">
         <h3>Toutes les tâches</h3>
@@ -100,15 +136,23 @@ class App extends Component {
 
       <div className="card mt-3">
         <div className="card-header">
-          <h3>Toutes les tâches</h3>
+          <div className="row">
+          <div className="col-6">
+            <h3>Toutes les tâches</h3>
+          </div>
+          <div className="col-6">
+             <ModalAddTask className="button-add pull-right" addTask={this.addTask} addTaskNotify={this.createNotification('created')} buttonLabel={"Ajouter tâche"}/>
+          </div>
+        </div>
         </div>
         <div className="card-body">
-          <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} modifyTask={this.modifyTask} />
+          <TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} deleteTaskNotify={this.createNotification('deleted')} modifyTask={this.modifyTask} modifyTaskNotify={this.createNotification('modified')} completeTask={this.completeTask} completeTaskNotify={this.createNotification('completed')} />
         </div>
       </div>
 
 
       </div>
+      <NotificationContainer/>
       </div>
       );
   }

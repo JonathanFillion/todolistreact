@@ -9,11 +9,17 @@ class TodoList extends Component {
 
 	modifyTask = (task) => {
 		this.props.modifyTask(task);
+		this.props.modifyTaskNotify();
 	}
 
 	deleteTask = (id) => {
-		console.log(id)
 		this.props.deleteTask(id)
+		this.props.deleteTaskNotify()
+	}
+
+	completeTask = (id) => {
+		this.props.completeTask(id)
+		this.props.completeTaskNotify()		
 	}
 
 	render() {
@@ -21,17 +27,17 @@ class TodoList extends Component {
 			<div className="col-12">
 			<ListGroup>
 			{this.props.tasks.map((task)=> {
-				return (<ListGroupItem className="mt-3 borders" key={task.id}>
+				return (<ListGroupItem className="mt-3 borders card" key={task.id}>
 				<ListGroupItemHeading>{task.title}</ListGroupItemHeading>
 				<ListGroupItemText>{task.description}</ListGroupItemText>
 				<div className="float-right">
-					<button className="btn btn-lg btn-danger mx-1" onClick={() => {this.deleteTask(task.id)}}><i  class="fa fa-trash larger-icons"></i></button>
+					<button className="btn btn-lg btn-danger mx-1" onClick={() => {this.deleteTask(task.id)}}><i  className="fa fa-trash larger-icons"></i></button>
 				</div>
 				<div className="float-right">
 					<ModalModifyTask modifyTask={this.modifyTask} task={task} buttonLabel={"Modifier tâche"}/>
 				</div>
 				<div className="float-right">
-					<button className="btn btn-lg btn-success mx-1" onClick={() => {}}><i class="fa fa-check larger-icons"></i></button>
+					<button className="btn btn-lg btn-success mx-1" onClick={() => {this.completeTask(task.id)}}><i className="fa fa-check larger-icons"></i></button>
 				</div>
 				</ListGroupItem>)})}
 			</ListGroup>
